@@ -4,30 +4,38 @@ import GameCard from "../components/gamecard";
 export default function Home() {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3001/games")
-      .then((res) => {
-        if (!res.ok) throw new Error("Errore nel caricamento giochi");
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => setGames(data))
-      .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Caricamento...</p>;
-  if (error) return <p className="">Errore: {error}</p>;
+  const filteredGames = games.filter((game) =>
+    game.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="">
+    <div className="container">
       <h1 className="">Lista Giochi</h1>
-      {games.length === 0 ? (
+
+      <input
+        type="text"
+        placeholder="Cerca un gioco..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className=""
+      />
+
+      {loading ? (
+        <p>Caricamento...</p>
+      ) : filteredGames.length === 0 ? (
         <p>Nessun gioco trovato.</p>
       ) : (
-        <div className="">
-          {games.map((game) => (
+        <div className="card-container">
+          {filteredGames.map((game) => (
             <GameCard key={game.id} game={game} />
           ))}
         </div>
