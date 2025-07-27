@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import GameCard from "../components/gamecard";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [games, setGames] = useState([]);
@@ -20,7 +21,7 @@ export default function Home() {
   return (
     <div className="container">
       <h1 className="">Lista Giochi</h1>
-
+      <Link to={`http://localhost:5173/favorites`}>Lista Desideri</Link>
       <input
         type="text"
         placeholder="Cerca un gioco..."
