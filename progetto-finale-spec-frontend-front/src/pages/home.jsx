@@ -20,8 +20,10 @@ export default function Home() {
 
   return (
     <div className="container">
-      <h1 className="">Lista Giochi</h1>
-      <Link to={`http://localhost:5173/favorites`}>Lista Desideri</Link>
+      <div className="navbar">
+        <h1 className="">GameSpace</h1>
+        <Link to={`http://localhost:5173/favorites`}>Lista Desideri</Link>
+      </div>
       <input
         type="text"
         placeholder="Cerca un gioco..."

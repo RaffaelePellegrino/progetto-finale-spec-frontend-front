@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { Link} from "react-router-dom";
 export default function Detail() {
   const { id } = useParams();
   const [game, setGame] = useState(null);
@@ -20,11 +20,10 @@ export default function Detail() {
   console.log(game);
 
   if (loading) return <p className="">Caricamento...</p>;
-  if (error) return <p className="">Errore: {error}</p>;
-  if (!game) return <p className="">Nessun gioco trovato.</p>;
 
   return (
-    <div className="">
+    <div className="container">
+      <Link to={`/`}>← Torna alla Home</Link>
       <h1 className="">{game.title}</h1>
       <p>
         <strong>Categoria:</strong> {game.category}
